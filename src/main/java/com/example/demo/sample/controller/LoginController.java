@@ -165,28 +165,8 @@ public class LoginController {
         context.getChildren().add(dialogStackPane);
     }
 
-//    private void startBody() {
-//        loginButton.addEventHandler(MouseEvent.MOUSE_CLICKED,new EventHandler<MouseEvent>() {
-//
-//            @Override
-//            public void handle(MouseEvent event) {
-//                Parent root = null;
-//                try {
-//                    root = FXMLLoader.load(getClass().getResource("/sample/body.fxml"));
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//                Scene scene = new Scene(root, 900, 800);
-//                Stage stage = new Stage();
-//                stage.initStyle(StageStyle.DECORATED);
-//                stage.setScene(scene);
-//                stage.show();
-//            }
-//        });
-//    }
-
     /**
-     * 进入body.fxml界面
+     * 进入info.fxml界面
      *
      * @param event
      * @throws IOException
@@ -197,9 +177,7 @@ public class LoginController {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setMaxWidth(1200);
         stage.getIcons().add(new Image("/imgs/icon.png"));
-//        stage.hide();
         stage.setScene(scene);
-//        stage.show();
     }
 
 

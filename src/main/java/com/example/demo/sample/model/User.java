@@ -6,7 +6,6 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -118,6 +117,4 @@ public class User {
                 ", recentTime=" + recentTime +
                 '}';
     }
-
-
 }

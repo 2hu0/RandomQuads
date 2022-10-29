@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.shape.*?>
 <?import java.lang.*?>
 <?import javafx.scene.image.*?>
 <?import com.jfoenix.controls.*?>
@@ -26,24 +25,24 @@
                <Font name="Comic Sans MS Bold Italic" size="22.0" />
            </font>
        </Label>
-   
-       <JFXTextArea fx:id="welcomeText" layoutX="171.0" layoutY="10.0" prefHeight="50.0" prefWidth="156.0">
+
+       <JFXTextField fx:id="welcomeText" layoutX="171.0" layoutY="10.0" prefHeight="50.0" prefWidth="156.0">
            <font>
                <Font name="Comic Sans MS Bold" size="22.0" />
            </font>
-       </JFXTextArea>
+       </JFXTextField>
    
        <JFXButton buttonType="RAISED" layoutX="5.0" layoutY="10.0" onAction="#backInfoScene" prefHeight="50.0" prefWidth="134.0" ripplerFill="#cebe4b" style="-fx-background-color: #cec081;" text="Back" textFill="#1b1818">
            <font>
                <Font name="Comic Sans MS Bold" size="22.0" />
            </font>
        </JFXButton>
-      <JFXButton buttonType="RAISED" layoutX="647.0" layoutY="917.0" onAction="#correctResult" prefHeight="50.0" prefWidth="134.0" ripplerFill="#d3c11c" style="-fx-background-color: #cec081;" text="Submit" textFill="#1b1818">
+      <JFXButton fx:id="submitButton" buttonType="RAISED" layoutX="620.0" layoutY="918.0" onAction="#correctResult" prefHeight="50.0" prefWidth="134.0" ripplerFill="#d3c11c" style="-fx-background-color: #cec081;" text="Submit" textFill="#1b1818">
          <font>
             <Font name="Comic Sans MS Bold" size="22.0" />
          </font>
       </JFXButton>
-      <JFXButton buttonType="RAISED" layoutX="1254.0" layoutY="10.0" onAction="#doLogout" prefHeight="50.0" prefWidth="134.0" ripplerFill="#bc9835" style="-fx-background-color: #cec081;" text="Logout" textFill="#1b1818">
+      <JFXButton buttonType="RAISED" layoutX="1238.0" layoutY="10.0" onAction="#doLogout" prefHeight="50.0" prefWidth="134.0" ripplerFill="#bc9835" style="-fx-background-color: #cec081;" text="Logout" textFill="#1b1818">
          <font>
             <Font name="Comic Sans MS Bold" size="22.0" />
          </font>
@@ -53,12 +52,12 @@
             <Font name="Comic Sans MS Bold Italic" size="25.0" />
          </font>
       </Label>
-      <Label fx:id="pointLabel" layoutX="432.0" layoutY="752.0" text="Your point is" visible="false">
+      <Label fx:id="pointLabel" layoutX="271.0" layoutY="909.0" text="Your point is " textFill="#c95252" visible="false">
          <font>
-            <Font name="Comic Sans MS" size="25.0" />
+            <Font name="Comic Sans MS Bold Italic" size="37.0" />
          </font>
       </Label>
-      <Label layoutX="1185.0" layoutY="924.0" text="Label">
+      <Label fx:id="dateTime" layoutX="1070.0" layoutY="917.0">
          <font>
             <Font name="Comic Sans MS Bold" size="26.0" />
          </font>
@@ -67,71 +66,110 @@
          <font>
             <Font name="Comic Sans MS Bold" size="21.0" />
          </font></Label>
-      <Label layoutX="682.0" layoutY="780.0" prefHeight="36.0" prefWidth="98.0" text="答题卡">
+      <Label layoutX="655.0" layoutY="781.0" prefHeight="36.0" prefWidth="98.0" text="答题卡">
          <font>
             <Font name="System Bold Italic" size="24.0" />
          </font>
       </Label>
-      <JFXTextField layoutX="283.0" layoutY="816.0" prefHeight="30.0" prefWidth="140.0" />
-      <Label layoutX="259.0" layoutY="823.0" prefHeight="20.0" prefWidth="23.0" text="1.">
+      <JFXTextField fx:id="resField1" layoutX="256.0" layoutY="817.0" prefHeight="30.0" prefWidth="140.0">
+         <font>
+            <Font name="Comic Sans MS" size="19.0" />
+         </font>
+      </JFXTextField>
+      <Label layoutX="232.0" layoutY="824.0" prefHeight="20.0" prefWidth="23.0" text="1.">
          <font>
             <Font name="Comic Sans MS" size="21.0" />
          </font>
       </Label>
-      <Label layoutX="440.0" layoutY="823.0" prefHeight="20.0" prefWidth="23.0" text="2.">
+      <Label layoutX="413.0" layoutY="824.0" prefHeight="20.0" prefWidth="23.0" text="2.">
          <font>
             <Font name="Comic Sans MS" size="21.0" />
          </font>
       </Label>
-      <Label layoutX="633.0" layoutY="823.0" prefHeight="20.0" prefWidth="23.0" text="3.">
+      <Label layoutX="606.0" layoutY="824.0" prefHeight="20.0" prefWidth="23.0" text="3.">
          <font>
             <Font name="Comic Sans MS" size="21.0" />
          </font>
       </Label>
-      <Label layoutX="821.0" layoutY="823.0" prefHeight="20.0" prefWidth="23.0" text="4.">
+      <Label layoutX="794.0" layoutY="824.0" prefHeight="20.0" prefWidth="23.0" text="4.">
          <font>
             <Font name="Comic Sans MS" size="21.0" />
          </font>
       </Label>
-      <Label layoutX="1012.0" layoutY="823.0" prefHeight="20.0" prefWidth="23.0" text="5.">
+      <Label layoutX="985.0" layoutY="824.0" prefHeight="20.0" prefWidth="23.0" text="5.">
          <font>
             <Font name="Comic Sans MS" size="21.0" />
          </font>
       </Label>
-      <JFXTextField layoutX="472.0" layoutY="816.0" prefHeight="30.0" prefWidth="140.0" />
-      <JFXTextField layoutX="663.0" layoutY="817.0" prefHeight="30.0" prefWidth="140.0" />
-      <JFXTextField layoutX="854.0" layoutY="815.0" prefHeight="30.0" prefWidth="140.0" />
-      <JFXTextField layoutX="1035.0" layoutY="817.0" prefHeight="30.0" prefWidth="140.0" />
-      <JFXTextField layoutX="1045.0" layoutY="866.0" prefHeight="30.0" prefWidth="140.0" />
-      <JFXTextField layoutX="854.0" layoutY="866.0" prefHeight="30.0" prefWidth="140.0" />
-      <JFXTextField layoutX="663.0" layoutY="868.0" prefHeight="30.0" prefWidth="140.0" />
-      <JFXTextField layoutX="472.0" layoutY="867.0" prefHeight="30.0" prefWidth="140.0" />
-      <Label layoutX="1009.0" layoutY="874.0" prefHeight="29.0" prefWidth="29.0" text="10.">
+      <JFXTextField fx:id="resField2" layoutX="445.0" layoutY="817.0" prefHeight="30.0" prefWidth="140.0" >
+         <font>
+            <Font name="Comic Sans MS" size="19.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="resField3" layoutX="636.0" layoutY="818.0" prefHeight="30.0" prefWidth="140.0" >
+         <font>
+            <Font name="Comic Sans MS" size="19.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="resField4" layoutX="827.0" layoutY="816.0" prefHeight="30.0" prefWidth="140.0" >
+         <font>
+            <Font name="Comic Sans MS" size="19.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="resField5" layoutX="1008.0" layoutY="818.0" prefHeight="30.0" prefWidth="140.0" >
+         <font>
+            <Font name="Comic Sans MS" size="19.0" />
+         </font>
+      </JFXTextField>
+
+      <JFXTextField fx:id="resField10" layoutX="1018.0" layoutY="867.0" prefHeight="30.0" prefWidth="140.0" >
+         <font>
+            <Font name="Comic Sans MS" size="19.0" />
+         </font>
+      </JFXTextField>
+
+      <JFXTextField fx:id="resField9" layoutX="827.0" layoutY="867.0" prefHeight="30.0" prefWidth="140.0" >
+         <font>
+            <Font name="Comic Sans MS" size="19.0" />
+         </font>
+      </JFXTextField>
+
+      <JFXTextField fx:id="resField8" layoutX="636.0" layoutY="869.0" prefHeight="30.0" prefWidth="140.0" >
+         <font>
+            <Font name="Comic Sans MS" size="19.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="resField7" layoutX="445.0" layoutY="868.0" prefHeight="30.0" prefWidth="140.0" >
+         <font>
+            <Font name="Comic Sans MS" size="19.0" />
+         </font>
+      </JFXTextField>
+      <Label layoutX="982.0" layoutY="875.0" prefHeight="29.0" prefWidth="29.0" text="10.">
          <font>
             <Font name="Comic Sans MS" size="21.0" />
          </font>
       </Label>
-      <Label layoutX="821.0" layoutY="874.0" prefHeight="20.0" prefWidth="23.0" text="9.">
+      <Label layoutX="794.0" layoutY="875.0" prefHeight="20.0" prefWidth="23.0" text="9.">
          <font>
             <Font name="Comic Sans MS" size="21.0" />
          </font>
       </Label>
-      <Label layoutX="633.0" layoutY="874.0" prefHeight="20.0" prefWidth="23.0" text="8.">
+      <Label layoutX="606.0" layoutY="875.0" prefHeight="20.0" prefWidth="23.0" text="8.">
          <font>
             <Font name="Comic Sans MS" size="21.0" />
          </font>
       </Label>
-      <Label layoutX="440.0" layoutY="874.0" prefHeight="20.0" prefWidth="23.0" text="7.">
+      <Label layoutX="413.0" layoutY="875.0" prefHeight="20.0" prefWidth="23.0" text="7.">
          <font>
             <Font name="Comic Sans MS" size="21.0" />
          </font>
       </Label>
-      <Label layoutX="259.0" layoutY="874.0" prefHeight="20.0" prefWidth="23.0" text="6.">
+      <Label layoutX="232.0" layoutY="875.0" prefHeight="20.0" prefWidth="23.0" text="6.">
          <font>
             <Font name="Comic Sans MS" size="21.0" />
          </font>
       </Label>
-      <JFXTextField layoutX="283.0" layoutY="867.0" prefHeight="30.0" prefWidth="140.0" />
+      <JFXTextField fx:id="resField6" layoutX="256.0" layoutY="868.0" prefHeight="30.0" prefWidth="140.0" />
       <Label fx:id="questionLab3" layoutX="98.0" layoutY="233.0" text="3A">
          <font>
             <Font name="Comic Sans MS Bold" size="21.0" />
@@ -177,57 +215,57 @@
             <Font name="Comic Sans MS Bold" size="21.0" />
          </font>
       </Label>
-      <Label fx:id="questionLab11" layoutX="18.0" layoutY="110.0" text="(1)">
+      <Label layoutX="18.0" layoutY="110.0" text="(1)">
          <font>
             <Font name="Comic Sans MS Bold" size="21.0" />
          </font>
       </Label>
-      <Label fx:id="questionLab111" layoutX="18.0" layoutY="173.0" text="(2)">
+      <Label layoutX="18.0" layoutY="173.0" text="(2)">
          <font>
             <Font name="Comic Sans MS Bold" size="21.0" />
          </font>
       </Label>
-      <Label fx:id="questionLab112" layoutX="18.0" layoutY="233.0" text="(3)">
+      <Label layoutX="18.0" layoutY="233.0" text="(3)">
          <font>
             <Font name="Comic Sans MS Bold" size="21.0" />
          </font>
       </Label>
-      <Label fx:id="questionLab113" layoutX="18.0" layoutY="289.0" text="(4)">
+      <Label layoutX="18.0" layoutY="289.0" text="(4)">
          <font>
             <Font name="Comic Sans MS Bold" size="21.0" />
          </font>
       </Label>
-      <Label fx:id="questionLab114" layoutX="18.0" layoutY="348.0" text="(5)">
+      <Label layoutX="18.0" layoutY="348.0" text="(5)">
          <font>
             <Font name="Comic Sans MS Bold" size="21.0" />
          </font>
       </Label>
-      <Label fx:id="questionLab115" layoutX="18.0" layoutY="410.0" text="(6)">
+      <Label layoutX="18.0" layoutY="410.0" text="(6)">
          <font>
             <Font name="Comic Sans MS Bold" size="21.0" />
          </font>
       </Label>
-      <Label fx:id="questionLab116" layoutX="18.0" layoutY="476.0" text="(7)">
+      <Label layoutX="18.0" layoutY="476.0" text="(7)">
          <font>
             <Font name="Comic Sans MS Bold" size="21.0" />
          </font>
       </Label>
-      <Label fx:id="questionLab117" layoutX="18.0" layoutY="532.0" text="(8)">
+      <Label layoutX="18.0" layoutY="532.0" text="(8)">
          <font>
             <Font name="Comic Sans MS Bold" size="21.0" />
          </font>
       </Label>
-      <Label fx:id="questionLab118" layoutX="18.0" layoutY="593.0" text="(9)">
+      <Label layoutX="18.0" layoutY="593.0" text="(9)">
          <font>
             <Font name="Comic Sans MS Bold" size="21.0" />
          </font>
       </Label>
-      <Label fx:id="questionLab119" layoutX="18.0" layoutY="653.0" text="(10)">
+      <Label layoutX="18.0" layoutY="653.0" text="(10)">
          <font>
             <Font name="Comic Sans MS Bold" size="21.0" />
          </font>
       </Label>
-      <Label fx:id="type1"  visible="false" layoutX="8.0" layoutY="85.0" text="判断题:">
+      <Label fx:id="type1" layoutX="8.0" layoutY="85.0" text="判断题:" visible="false">
          <font>
             <Font name="System Bold" size="19.0" />
          </font>
@@ -282,16 +320,15 @@
             <Font name="Comic Sans MS Bold" size="21.0" />
          </font>
       </Label>
-      <Label fx:id="type2" visible="false" layoutX="96.0" layoutY="85.0" text="判断题:">
+      <Label fx:id="type2" layoutX="96.0" layoutY="85.0" text="判断题:" visible="false">
          <font>
             <Font name="System Bold" size="19.0" />
          </font>
       </Label>
-      <Label fx:id="type3" visible="false" layoutX="186.0" layoutY="85.0" text="判断题:">
+      <Label fx:id="type3" layoutX="186.0" layoutY="85.0" text="判断题:" visible="false">
          <font>
             <Font name="System Bold" size="19.0" />
          </font>
       </Label>
    </children>
-
 </AnchorPane>

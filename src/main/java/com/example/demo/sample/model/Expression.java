@@ -1,7 +1,6 @@
 package com.example.demo.sample.model;
 
 import com.example.demo.sample.utils.RandomUtils;
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;

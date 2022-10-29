@@ -4,7 +4,6 @@ import com.example.demo.SpringbootJavafxDemoApplication;
 import com.example.demo.sample.mapper.UserMapper;
 import com.example.demo.sample.model.Difficulty;
 import com.example.demo.sample.model.Expression;
-import com.example.demo.sample.model.User;
 import com.example.demo.sample.utils.Range;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextArea;
@@ -29,7 +28,6 @@ import org.springframework.stereotype.Controller;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -49,54 +47,7 @@ public class InformationController {
     //答案列表
     public List<String> resList;
 
-    //存放对错
-    public List<String> myRes = new ArrayList<>();
-    /**
-     * 存放题目的textArea
-     */
-    @FXML
-    public JFXTextArea textArea1;
-    @FXML
-    public JFXTextArea textArea2;
-    @FXML
-    public JFXTextArea textArea3;
-    @FXML
-    public JFXTextArea textArea4;
-    @FXML
-    public JFXTextArea textArea5;
-    @FXML
-    public JFXTextArea textArea6;
-    @FXML
-    public JFXTextArea textArea7;
-    @FXML
-    public JFXTextArea textArea8;
-    @FXML
-    public JFXTextArea textArea9;
-    @FXML
-    public JFXTextArea textArea10;
-    /**
-     * 存放用户输入答案的地方
-     */
-    @FXML
-    public JFXTextField testField1;
-    @FXML
-    public JFXTextField testField2;
-    @FXML
-    public JFXTextField testField4;
-    @FXML
-    public JFXTextField testField3;
-    @FXML
-    public JFXTextField testField5;
-    @FXML
-    public JFXTextField testField7;
-    @FXML
-    public JFXTextField testField9;
-    @FXML
-    public JFXTextField testField6;
-    @FXML
-    public JFXTextField testField10;
-    @FXML
-    public JFXTextField testField8;
+
 
     /**
      * 是否含有负数
@@ -156,6 +107,8 @@ public class InformationController {
      */
     @FXML
     public LineChart<String,Number> analysisChart;
+    @FXML
+    public Label noticeLab;
     /**
      * 进入习题界面
      */
@@ -203,15 +156,22 @@ public class InformationController {
      */
     @FXML
     public void initialize() {
+        showInfo();
         showDate();
         showChart();
-       //得到登录对象
-        User loginUser = LoginController.loginUser;
-        welcomeText.setText("       Hello, " + loginUser.getUsername());
+
+    }
+
+    /**
+     * 展示信息
+     */
+    private void showInfo() {
+        welcomeText.setText("       Hello, " + LoginController.loginUser.getUsername());
     }
 
     /**
      * 注销登录
+     *
      * @param event
      */
     public void doLogout(ActionEvent event) throws IOException {
@@ -221,9 +181,7 @@ public class InformationController {
         scene.setCursor(new ImageCursor(new Image("/imgs/cursor.png")));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.getIcons().add(new Image("/imgs/icon.png"));
-//        stage.hide();
         stage.setScene(scene);
-//        stage.show();
     }
 
     /**
@@ -231,18 +189,71 @@ public class InformationController {
      * @param event
      */
     public void create(ActionEvent event) throws IOException {
-        //1.挂载数据
-        mountData();
-        //2.切换场景
-        gotoExercises(event);
-//        cancleTextArea();
-//        createQuestions();
-//        for (int i = 0 ; i <questionList.size();i++) {
-//            System.out.println(questionList.get(i));
-//            System.out.println("=============");
-//        }
+        //1.校验数据
+        if (checkData()) {
+            //2.挂载数据
+            mountData();
+            //3.切换场景
+            gotoExercises(event);
+        }else {
+            noticeLab.setVisible(true);
+        }
+
     }
 
+    /**
+     * 校验数据
+     * @return
+     */
+    private boolean checkData() {
+        //检查是否为空
+        if(!checkIsBlank()) {
+            return false;
+        };
+        String choiceNum = jfxChoiceNum.getText();
+        String judgeNum = jfxJudgeNum.getText();
+        String fillNum = jfxFillNum.getText();
+        String rangeNum = jfxRangeNum.getText();
+        String jfxOperatorNumText = jfxOperatorNum.getText();
+        //判断是否为整数
+        if(checkIsDigit(choiceNum) && checkIsDigit(judgeNum) && checkIsDigit(fillNum)
+                && checkIsDigit(jfxOperatorNumText) && checkIsDigit(rangeNum)) {
+            return false;
+        }
+        if (Integer.parseInt(jfxOperatorNumText) < 2) {
+            return false;
+        }
+        if ((Integer.parseInt(choiceNum) + Integer.parseInt(judgeNum) + Integer.parseInt(fillNum)) !=10) {
+            return false;
+        }
+        int range = Integer.parseInt(rangeNum);
+        return range == 10 || range == 100 || range == 1000;
+    }
+
+    /**
+     * 检查是否为空
+     * @return
+     */
+    private boolean checkIsBlank() {
+        return !"".equals(jfxChoiceNum.getText()) && !"".equals(jfxFillNum.getText()) &&
+                !"".equals(jfxRangeNum.getText()) && !"".equals(jfxJudgeNum.getText()) &&
+                !"".equals(jfxOperatorNum.getText());
+    }
+
+    /**
+     * 检验是否为数字
+     *
+     * @param str
+     * @return
+     */
+    private boolean checkIsDigit(String str) {
+        for (int i = str.length(); --i >= 0; ) {
+            if (!Character.isDigit(str.charAt(i))) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 
     /**
@@ -282,92 +293,10 @@ public class InformationController {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setMaxWidth(1400);
         stage.getIcons().add(new Image("/imgs/icon.png"));
-//        stage.hide();
         stage.setScene(scene);
-//        stage.setResizable(true);
-//        stage.setFullScreen(true);
-//        stage.show();
+
     }
 
-
-    /**
-     * 验证答案
-     */
-    public void verify() {
-        //得到答案
-        List<String> questionAnswer = expression.getQuestionAnswer();
-        questionAnswer.forEach(System.out::println);
-        if (testField1.getText().equals(questionAnswer.get(0))) {
-            myRes.add("1");
-        }else {
-            myRes.add("0");
-        }
-        if (testField2.getText().equals(questionAnswer.get(1))) {
-            myRes.add("1");
-        }else {
-            myRes.add("0");
-        }
-        if (testField3.getText().equals(questionAnswer.get(2))) {
-            myRes.add("1");
-        }else {
-            myRes.add("0");
-        }
-        if (testField4.getText().equals(questionAnswer.get(3))) {
-            myRes.add("1");
-        }else {
-            myRes.add("0");
-        }
-        if (testField5.getText().equals(questionAnswer.get(4))) {
-            myRes.add("1");
-        }else {
-            myRes.add("0");
-        }
-        if (testField6.getText().equals(questionAnswer.get(5))) {
-            myRes.add("1");
-        }else {
-            myRes.add("0");
-        }
-        if (testField7.getText().equals(questionAnswer.get(6))) {
-            myRes.add("1");
-        }else {
-            myRes.add("0");
-        }
-        if (testField8.getText().equals(questionAnswer.get(7))) {
-            myRes.add("1");
-        }else {
-            myRes.add("0");
-        }
-
-        if (testField9.getText().equals(questionAnswer.get(8))) {
-            myRes.add("1");
-        }else {
-            myRes.add("0");
-        }
-
-        if (testField10.getText().equals(questionAnswer.get(9))) {
-            myRes.add("1");
-        }else {
-            myRes.add("0");
-        }
-    }
-
-    /**
-     * 批改答案
-     *
-     * @param event
-     */
-    public void correctResult(ActionEvent event) {
-        int point = 0;
-        verify();
-        //得分
-        for (String str :myRes) {
-            if ("1".equals(str)){
-                point++;
-            }
-        }
-        pointLabel.setText(pointLabel.getText() +"\n"+"       " +point);
-        pointLabel.setVisible(true);
-    }
 
     /**
      * 显示当前时间

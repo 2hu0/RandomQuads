@@ -4,6 +4,7 @@ package com.example.demo.sample.utils;
 import com.sun.org.apache.bcel.internal.generic.BREAKPOINT;
 
 /**枚举运算符及其优先级大小
+ *
  * @author 2hu0
  */
 public enum Operator {

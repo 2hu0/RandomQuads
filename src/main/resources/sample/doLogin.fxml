@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="context" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.sample.controller.LoginController">
+    <children>
+        <ImageView fitHeight="565.0" fitWidth="1010.0" layoutX="-4.0" layoutY="-7.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../imgs/background.png" />
+            </image>
+        </ImageView>
+        <StackPane fx:id="root" layoutX="120.0" layoutY="-13.0" prefHeight="550.0" prefWidth="675.0">
+            <children>
+                <VBox alignment="CENTER" maxHeight="366.0" maxWidth="610.0" prefHeight="152.0" prefWidth="610.0" spacing="30" />
+            </children>
+            <!--      <JFXBadge layoutX="258.0" layoutY="175.0" prefHeight="30.0" prefWidth="46.0" />-->
+        </StackPane>
+        <JFXTextField fx:id="usernameField" focusColor="#cc2541" labelFloat="true" layoutX="346.0" layoutY="230.0" promptText="Please input username~">
+            <font>
+                <Font name="Comic Sans MS" size="20.0" />
+            </font>
+        </JFXTextField>
+        <Label layoutX="185.0" layoutY="242.0" text="Username">
+            <font>
+                <Font name="Comic Sans MS Bold" size="29.0" />
+            </font>
+        </Label>
+        <Label layoutX="185.0" layoutY="365.0" text="Password">
+            <font>
+                <Font name="Comic Sans MS Bold" size="29.0" />
+            </font>
+        </Label>
+        <JFXPasswordField fx:id="passwordField" focusColor="#cc2541" labelFloat="true" layoutX="343.0" layoutY="358.0" promptText="Please input password~">
+            <font>
+                <Font name="Comic Sans MS" size="20.0" />
+            </font>
+        </JFXPasswordField>
+        <JFXButton fx:id="loginButton" buttonType="RAISED" layoutX="387.0" layoutY="566.0" onAction="#doLogin" prefHeight="52.0" prefWidth="224.0" ripplerFill="#222288" style="-fx-background-color: #7AD4EB;" text="Login" textFill="#1b1818">
+            <font>
+                <Font name="Dubai Medium" size="29.0" />
+            </font>
+        </JFXButton>
+
+        <JFXDialog fx:id="errorDialog" prefHeight="262.0" prefWidth="610.0">
+            <content>
+                <JFXDialogLayout>
+                    <heading>
+                        <Label>错误提示</Label>
+                    </heading>
+                    <body>
+                        <Label>用户名或密码错误,请重新输入~</Label>
+                    </body>
+                    <actions>
+                        <JFXButton fx:id="acceptButton" onAction="#close" prefHeight="30" prefWidth="60" style="-fx-background-color: #DDA0DD;" text="确 定" />
+                    </actions>
+                </JFXDialogLayout>
+            </content>
+        </JFXDialog>
+
+        <JFXDialog fx:id="registerDialog" prefHeight="262.0" prefWidth="610.0">
+            <content>
+                <JFXDialogLayout>
+                    <heading>
+                        <Label>注册用户</Label>
+                    </heading>
+                    <children>
+                        <JFXTextField fx:id="registerNameField" focusColor="#cc2541" layoutX="346.0" layoutY="160.0" promptText="请输入用户名(大于等于3位且唯一)~">
+                            <font>
+                                <Font name="Comic Sans MS" size="20.0" />
+                            </font>
+                        </JFXTextField>
+                        <JFXPasswordField fx:id="registerPassField" focusColor="#cc2541" layoutX="343.0" layoutY="358.0" promptText="请输入密码(大于等于6位)~">
+                            <font>
+                                <Font name="Comic Sans MS" size="20.0" />
+                            </font>
+                        </JFXPasswordField>
+                    </children>
+                   <children>
+                       <Label fx:id="noticeLabel" layoutX="185.0" layoutY="242.0" text="Input Error ,please retry." textFill="red" visible="false">
+                           <font>
+                               <Font name="Comic Sans MS Bold" size="20.0" />
+                           </font>
+                       </Label>
+                   </children>
+                    <actions>
+                        <JFXButton onAction="#doRegister" prefHeight="30" prefWidth="60" style="-fx-background-color: #b9dda0;" text="确 定" />
+                    </actions>
+                    <actions>
+                        <JFXButton onAction="#exitRegister" prefHeight="30" prefWidth="60" style="-fx-background-color: #a0d1dd;" text="返 回" />
+                    </actions>
+                </JFXDialogLayout>
+            </content>
+        </JFXDialog>
+
+        <ImageView fitHeight="195.0" fitWidth="217.0" layoutX="47.0" layoutY="567.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../imgs/math.png" />
+            </image>
+        </ImageView>
+        <JFXButton fx:id="loginButton1" buttonType="RAISED" layoutX="387.0" layoutY="692.0" onAction="#openRegisterDialog" prefHeight="52.0" prefWidth="224.0" ripplerFill="#222288" style="-fx-background-color: #7AD4EB;" text="Register" textFill="#1b1818">
+            <font>
+                <Font name="Dubai Medium" size="29.0" />
+            </font>
+        </JFXButton>
+        <Label layoutX="354.0" layoutY="653.0" text="don't have an account? sign up now">
+            <font>
+                <Font name="Comic Sans MS" size="19.0" />
+            </font>
+        </Label>
+    </children>
+</AnchorPane>

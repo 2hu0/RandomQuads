@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import javafx.scene.image.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="900.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.sample.controller.InformationController">
+    <children>
+        <ImageView fitHeight="727.0" fitWidth="1006.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../imgs/2.jpg" />
+            </image>
+        </ImageView>
+
+        <JFXCheckBox fx:id="negativeControl" layoutX="204.0" layoutY="582.0" style="-jfx-unchecked-color: #4169E1;" text="含有负数">
+         <font>
+            <Font size="25.0" />
+         </font>
+        </JFXCheckBox>
+        <JFXCheckBox fx:id="decimalControl" layoutX="204.0" layoutY="403.0" prefHeight="107.0" prefWidth="103.0" style="-jfx-unchecked-color: #4169E1;" text="含有小数">
+         <font>
+            <Font size="25.0" />
+         </font></JFXCheckBox>
+        <JFXCheckBox fx:id="bracketsControl" layoutX="204.0" layoutY="510.0" style="-jfx-unchecked-color: #4169E1;" text="含有括号">
+         <font>
+            <Font size="25.0" />
+         </font></JFXCheckBox>
+        <Label layoutX="269.0" layoutY="43.0">
+            <font>
+                <Font name="Trebuchet MS" size="21.0" />
+            </font>
+        </Label>
+        <Label />
+        <Label alignment="CENTER" layoutX="730.0" layoutY="62.0" rotate="18.7" text="No sweet without sweat.">
+            <font>
+                <Font name="Comic Sans MS Bold Italic" size="22.0" />
+            </font>
+        </Label>
+
+        <JFXTextArea fx:id="welcomeText" layoutY="-5.0" prefHeight="50.0" prefWidth="313.0">
+            <font>
+                <Font name="Comic Sans MS Bold" size="22.0" />
+            </font>
+        </JFXTextArea>
+
+        <JFXButton  buttonType="RAISED" layoutX="423.0" layoutY="647.0" onAction="#create" prefHeight="50.0" prefWidth="134.0" ripplerFill="#ce39c9" style="-fx-background-color: #c281ce;" text="Start" textFill="#1b1818">
+            <font>
+                <Font name="Comic Sans MS Bold" size="22.0" />
+            </font>
+        </JFXButton>
+        <JFXTextField fx:id="jfxChoiceNum" layoutX="709.0" layoutY="430.0" prefHeight="41.0" prefWidth="89.0" promptText="选择题数">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font></JFXTextField>
+        <JFXTextField fx:id="jfxRangeNum" layoutX="447.0" layoutY="458.0" prefHeight="41.0" prefWidth="98.0" promptText="数据范围">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font></JFXTextField>
+        <JFXTextField fx:id="jfxOperatorNum" layoutX="447.0" layoutY="536.0" prefHeight="41.0" prefWidth="111.0" promptText="运算数个数">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font></JFXTextField>
+        <JFXButton buttonType="RAISED" layoutX="863.0" layoutY="10.0" onAction="#doLogout" prefHeight="50.0" prefWidth="134.0" ripplerFill="#bc9835" style="-fx-background-color: #cec081;" text="Logout" textFill="#1b1818">
+            <font>
+                <Font name="Comic Sans MS Bold" size="22.0" />
+            </font>
+        </JFXButton>
+        <Label fx:id="pointLabel" layoutX="432.0" layoutY="752.0" text="Your point is" visible="false">
+            <font>
+                <Font name="Comic Sans MS" size="25.0" />
+            </font>
+        </Label>
+      <JFXTextField fx:id="jfxJudgeNum" layoutX="709.0" layoutY="498.0" prefHeight="41.0" prefWidth="89.0" promptText="判断题数">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="jfxFillNum" layoutX="709.0" layoutY="574.0" prefHeight="41.0" prefWidth="89.0" promptText="填空题数">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </JFXTextField>
+      <Line endX="900.0" layoutX="100.0" layoutY="400.0" startX="-100.0" />
+      <Label layoutX="329.0" layoutY="732.0" prefHeight="91.0" prefWidth="343.0" text="     author: 2hu0">
+         <font>
+            <Font name="Comic Sans MS Bold" size="28.0" />
+         </font></Label>
+      <Label fx:id="dateLabel" layoutX="329.0" layoutY="809.0" text="Labe">
+         <font>
+            <Font name="Comic Sans MS Bold" size="29.0" />
+         </font>
+      </Label>
+      <Label layoutY="507.0" text="Control Menu">
+         <font>
+            <Font name="Comic Sans MS Bold" size="28.0" />
+         </font>
+      </Label>
+      <Label layoutX="130.0" layoutY="416.0" text="One">
+         <font>
+            <Font name="Comic Sans MS Bold" size="26.0" />
+         </font>
+      </Label>
+      <Label layoutX="383.0" layoutY="417.0" text="Two">
+         <font>
+            <Font name="Comic Sans MS Bold" size="26.0" />
+         </font>
+      </Label>
+      <Label layoutX="606.0" layoutY="416.0" text="Three">
+         <font>
+            <Font name="Comic Sans MS Bold" size="26.0" />
+         </font>
+      </Label>
+      <LineChart fx:id="analysisChart" layoutX="264.0" layoutY="47.0" prefHeight="340.0" prefWidth="514.0" title="Recent Submit">
+        <xAxis>
+          <CategoryAxis animated="false" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis animated="false" autoRanging="false" minorTickCount="1" minorTickLength="1.0" side="LEFT" tickUnit="1.0" upperBound="10.0">
+               <tickLabelFont>
+                  <Font name="Comic Sans MS Bold Italic" size="16.0" />
+               </tickLabelFont>
+            </NumberAxis>
+        </yAxis>
+      </LineChart>
+      <Label layoutX="395.0" layoutY="6.0" text="Data Information">
+         <font>
+            <Font name="Comic Sans MS Bold Italic" size="20.0" />
+         </font>
+      </Label>
+    </children>
+   <opaqueInsets>
+      <Insets bottom="5.0" right="5.0" top="5.0" />
+   </opaqueInsets>
+
+</AnchorPane>

@@ -211,7 +211,6 @@ public class ExercisesGenerator {
             return " ";
         }
         String left = printExpression(node.left);
-        // node.toPlainString();
         String mid = node.toString();
 
         if (node.left instanceof OperatorNode && node instanceof OperatorNode) {

@@ -101,45 +101,45 @@
             <Font name="Comic Sans MS" size="21.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="resField2" layoutX="445.0" layoutY="817.0" prefHeight="30.0" prefWidth="140.0" >
+      <JFXTextField fx:id="resField2" layoutX="445.0" layoutY="817.0" prefHeight="30.0" prefWidth="140.0">
          <font>
             <Font name="Comic Sans MS" size="19.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="resField3" layoutX="636.0" layoutY="818.0" prefHeight="30.0" prefWidth="140.0" >
+      <JFXTextField fx:id="resField3" layoutX="636.0" layoutY="818.0" prefHeight="30.0" prefWidth="140.0">
          <font>
             <Font name="Comic Sans MS" size="19.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="resField4" layoutX="827.0" layoutY="816.0" prefHeight="30.0" prefWidth="140.0" >
+      <JFXTextField fx:id="resField4" layoutX="827.0" layoutY="816.0" prefHeight="30.0" prefWidth="140.0">
          <font>
             <Font name="Comic Sans MS" size="19.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="resField5" layoutX="1008.0" layoutY="818.0" prefHeight="30.0" prefWidth="140.0" >
-         <font>
-            <Font name="Comic Sans MS" size="19.0" />
-         </font>
-      </JFXTextField>
-
-      <JFXTextField fx:id="resField10" layoutX="1018.0" layoutY="867.0" prefHeight="30.0" prefWidth="140.0" >
+      <JFXTextField fx:id="resField5" layoutX="1008.0" layoutY="818.0" prefHeight="30.0" prefWidth="140.0">
          <font>
             <Font name="Comic Sans MS" size="19.0" />
          </font>
       </JFXTextField>
 
-      <JFXTextField fx:id="resField9" layoutX="827.0" layoutY="867.0" prefHeight="30.0" prefWidth="140.0" >
+      <JFXTextField fx:id="resField10" layoutX="1018.0" layoutY="867.0" prefHeight="30.0" prefWidth="140.0">
          <font>
             <Font name="Comic Sans MS" size="19.0" />
          </font>
       </JFXTextField>
 
-      <JFXTextField fx:id="resField8" layoutX="636.0" layoutY="869.0" prefHeight="30.0" prefWidth="140.0" >
+      <JFXTextField fx:id="resField9" layoutX="827.0" layoutY="867.0" prefHeight="30.0" prefWidth="140.0">
          <font>
             <Font name="Comic Sans MS" size="19.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="resField7" layoutX="445.0" layoutY="868.0" prefHeight="30.0" prefWidth="140.0" >
+
+      <JFXTextField fx:id="resField8" layoutX="636.0" layoutY="869.0" prefHeight="30.0" prefWidth="140.0">
+         <font>
+            <Font name="Comic Sans MS" size="19.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="resField7" layoutX="445.0" layoutY="868.0" prefHeight="30.0" prefWidth="140.0">
          <font>
             <Font name="Comic Sans MS" size="19.0" />
          </font>

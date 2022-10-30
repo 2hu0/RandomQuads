@@ -22,9 +22,10 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -36,7 +37,7 @@ import java.util.List;
 
 @Controller
 public class InformationController {
-    @Autowired
+    @Resource
     public UserMapper userMapper;
 
     public static Difficulty difficulty;

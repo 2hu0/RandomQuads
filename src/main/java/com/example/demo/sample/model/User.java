@@ -7,6 +7,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
+import java.util.Deque;
+import java.util.LinkedList;
 
 /**
  * @author 2hu0
@@ -15,7 +17,7 @@ import java.util.Date;
 public class User {
 
     @TableId("user_id")
-    private int id;
+    private Integer id;
 
     @TableField("user_name")
     private String username;
@@ -32,6 +34,7 @@ public class User {
     @TableField("user_completed")
     private int completedExercises;
 
+
     /**
      * 错题数
      */
@@ -39,10 +42,11 @@ public class User {
     @TableField("user_error_exercises")
     private int errorExercises;
 
-    @TableField("user_recent_time")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    @TableField("user_last_login_time")
     private Date recentTime;
+
+    @TableField("user_create_time")
+    private Date createTime;
 
     public User() {
         this.id = id;
@@ -53,9 +57,33 @@ public class User {
         this.recentTime = recentTime;
     }
 
+    public User(int id, String username, String password, int completedExercises, int errorExercises, Date recentTime, Date createTime) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.completedExercises = completedExercises;
+        this.errorExercises = errorExercises;
+        this.recentTime = recentTime;
+        this.createTime = createTime;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
     public User(String username, String password) {
         this.username = username;
         this.password = password;
+    }
+
+    public User(String username, String password, Date date) {
+        this.username = username;
+        this.password = password;
+        this.recentTime = date;
     }
 
     public int getId() {

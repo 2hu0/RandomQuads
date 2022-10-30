@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
+import java.util.Date;
 
 
 /**
@@ -61,7 +62,11 @@ public class LoginController {
     private JFXDialog registerDialog;
 
     private StackPane dialogStackPane;
-
+    /**
+     * 加载动画
+     */
+    @FXML
+    public JFXSpinner loadingSpinner;
 
 
     /**
@@ -87,6 +92,8 @@ public class LoginController {
                     usernameField.setText("");
                     passwordField.setText("");
                     loginUser = user;
+                    user.setRecentTime(new Date());
+                    userMapper.updateById(user);
                     //进入新的scene
                     changeToBody(actionEvent);
                 } else {
@@ -97,6 +104,7 @@ public class LoginController {
             }
         }
     }
+
 
     /**
      * 弹出JFXDialog弹窗
@@ -143,7 +151,8 @@ public class LoginController {
                 exitRegister(actionEvent);
             } else {
                 //插入到数据库里
-                User user = new User(username, password);
+                User user = new User(username, password,new Date());
+                userMapper.insert(user);
                 System.out.println("insert");
                 //userMapper.insert(user);
                 registerDialog.close();

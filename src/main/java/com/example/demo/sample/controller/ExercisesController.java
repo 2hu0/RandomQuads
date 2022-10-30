@@ -1,8 +1,13 @@
 package com.example.demo.sample.controller;
 
 import com.example.demo.SpringbootJavafxDemoApplication;
+import com.example.demo.sample.mapper.RecordMapper;
 import com.example.demo.sample.mapper.UserMapper;
+import com.example.demo.sample.model.ExercisesResult;
 import com.example.demo.sample.model.Expression;
+import com.example.demo.sample.model.Record;
+import com.example.demo.sample.model.User;
+import com.example.demo.sample.utils.FileUtils;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.animation.Animation;
@@ -17,13 +22,17 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.apache.ibatis.logging.stdout.StdOutImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -32,20 +41,54 @@ import java.util.List;
 @Controller
 public class ExercisesController {
 
-    @Autowired
+    @Resource
     public UserMapper userMapper;
 
+    @Resource
+    public RecordMapper recordMapper;
+    /**
+     * 问题
+     */
     public Expression expression;
-    //问题列表
+    /**
+     * 提交结果
+     */
+    public ExercisesResult exercisesResult;
+    /**
+     * 试题分数
+     */
+    public int point = 0;
+    /**
+     * 问题列表
+     */
     public List<String> questionList;
-    //答案列表
-    public List<String> resList;
-    //右侧题目信息
+    /**
+     * 答案列表
+     */
+    List<String> questionAnswer;
+    /**
+     * 右侧题目信息
+     */
     public List<String> rightInfo;
 
-    //存放对错
+    /**
+     * 完整信息
+     */
+    public List<String> fullVersionQues;
+
+    /**
+     * 存放对错
+     */
+    public List<String> isRight = new ArrayList<>();
+
+    //存放我的结果
     public List<String> myRes = new ArrayList<>();
 
+    //存放错题
+    public List<String> errorQuestion = new ArrayList<>();
+
+    //提交记录信息
+    public Record record;
 
 
     @FXML
@@ -125,6 +168,8 @@ public class ExercisesController {
     public JFXTextField resField8;
     @FXML
     public JFXTextField resField7;
+    @FXML
+    public JFXTextField resField6;
 
     /**
      * 生成题目列表
@@ -253,61 +298,94 @@ public class ExercisesController {
      * 验证答案
      */
     public void verify() {
+        fullVersionQues = expression.getFullVersionQues();
         //得到答案
-        List<String> questionAnswer = expression.getQuestionAnswer();
+        questionAnswer = expression.getQuestionAnswer();
+        System.out.println("1111111111111111111111");
         questionAnswer.forEach(System.out::println);
+        System.out.println("1111111111111111111111");
         if (resField1.getText().equals(questionAnswer.get(0))) {
-            myRes.add("1");
+            point++;
+            isRight.add("1");
         } else {
-            myRes.add("0");
+            isRight.add("0");
+            errorQuestion.add("1.  " + fullVersionQues.get(0));
         }
+        myRes.add(resField1.getText());
         if (resField2.getText().equals(questionAnswer.get(1))) {
-            myRes.add("1");
+            point++;
+            isRight.add("1");
         } else {
-            myRes.add("0");
+            isRight.add("0");
+            errorQuestion.add("2.  " + fullVersionQues.get(1));
         }
+        myRes.add(resField2.getText());
         if (resField3.getText().equals(questionAnswer.get(2))) {
-            myRes.add("1");
+            point++;
+            isRight.add("1");
         } else {
-            myRes.add("0");
+            isRight.add("0");
+            errorQuestion.add("3.  " + fullVersionQues.get(2));
         }
+        myRes.add(resField3.getText());
         if (resField4.getText().equals(questionAnswer.get(3))) {
-            myRes.add("1");
+            point++;
+            isRight.add("1");
         } else {
-            myRes.add("0");
+            isRight.add("0");
+            errorQuestion.add("4.  " + fullVersionQues.get(3));
         }
+        myRes.add(resField4.getText());
         if (resField5.getText().equals(questionAnswer.get(4))) {
-            myRes.add("1");
+            point++;
+            isRight.add("1");
         } else {
-            myRes.add("0");
+            isRight.add("0");
+            errorQuestion.add("5.  " + fullVersionQues.get(4));
         }
-        if (rightLab6.getText().equals(questionAnswer.get(5))) {
-            myRes.add("1");
+        myRes.add(resField5.getText());
+        if (resField6.getText().equals(questionAnswer.get(5))) {
+            point++;
+            isRight.add("1");
         } else {
-            myRes.add("0");
+            isRight.add("0");
+            errorQuestion.add("6.  " + fullVersionQues.get(5));
         }
+        myRes.add(resField6.getText());
         if (resField7.getText().equals(questionAnswer.get(6))) {
-            myRes.add("1");
+            point++;
+            isRight.add("1");
         } else {
-            myRes.add("0");
+            isRight.add("0");
+            errorQuestion.add("7.  " + fullVersionQues.get(6));
         }
+        myRes.add(resField7.getText());
         if (resField8.getText().equals(questionAnswer.get(7))) {
-            myRes.add("1");
+            point++;
+            isRight.add("1");
         } else {
-            myRes.add("0");
+            isRight.add("0");
+            errorQuestion.add("8.  " + fullVersionQues.get(7));
         }
+        myRes.add(resField8.getText());
 
         if (resField9.getText().equals(questionAnswer.get(8))) {
-            myRes.add("1");
+            point++;
+            isRight.add("1");
         } else {
-            myRes.add("0");
+            isRight.add("0");
+            errorQuestion.add("9.  " + fullVersionQues.get(8));
         }
+        myRes.add(resField9.getText());
 
         if (resField10.getText().equals(questionAnswer.get(9))) {
-            myRes.add("1");
+            point++;
+            isRight.add("1");
         } else {
-            myRes.add("0");
+            isRight.add("0");
+            errorQuestion.add("10. " + fullVersionQues.get(9));
         }
+        myRes.add(resField10.getText());
     }
 
     /**
@@ -315,20 +393,43 @@ public class ExercisesController {
      *
      * @param event
      */
-    public void correctResult(ActionEvent event) {
-        int point = 0;
+    public void correctResult(ActionEvent event) throws IOException {
         verify();
-
-        //得分
-        for (String str : myRes) {
-            System.out.println(str);
-            if ("1".equals(str)) {
-                point++;
-            }
-        }
         pointLabel.setText(pointLabel.getText() + point);
         pointLabel.setVisible(true);
         submitButton.setDisable(true);
+        //汇总数据
+        generateUserData();
+    }
+
+    /**
+     * 汇总数据 准备写入文件和数据库
+     */
+    @Transactional
+    public void generateUserData() throws IOException {
+        // 1.写入文件
+        exercisesResult = new ExercisesResult();
+        exercisesResult.setDate(new Date());
+        exercisesResult.setUser(LoginController.loginUser);
+        exercisesResult.setQuestionList(fullVersionQues);
+        exercisesResult.setPoint(point);
+        exercisesResult.setMyAnswer(myRes);
+        exercisesResult.setQuestionAnswer(questionAnswer);
+        exercisesResult.setErrorQuestion(errorQuestion);
+        FileUtils.writeFile(exercisesResult.getUser().getUsername(), exercisesResult.toString());
+        //2.更新用户信息数据库
+        User user = LoginController.loginUser;
+        //做题数目加10
+        user.setCompletedExercises(user.getCompletedExercises() + 10);
+        //更新错误题目数量
+        user.setErrorExercises(user.getErrorExercises() + 10 - point);
+        userMapper.updateById(user);
+        //3.提交记录写入数据库
+        record = new Record();
+        record.setRecordName(LoginController.loginUser.getUsername());
+        record.setRecordPoint(point);
+        record.setRecordTime(new Date());
+        recordMapper.insert(record);
     }
 
     /**

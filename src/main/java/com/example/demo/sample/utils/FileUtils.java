@@ -14,13 +14,20 @@ import java.nio.file.StandardOpenOption;
 public class FileUtils {
 
     public static void writeFile(String fileName,String target) throws IOException {
-        Path path = Paths.get(fileName);
-        try (BufferedWriter writer =
-                     Files.newBufferedWriter(path, StandardCharsets.UTF_8,
-                             StandardOpenOption.APPEND)) {
-            writer.write(target+"\n");
-        } catch (Exception e) {
-            e.printStackTrace();
+        String path = "D:\\dsProjectDesign\\springboot-javafx-demo\\src\\main\\resources\\file\\" + fileName + ".txt";
+        File file = new File(path);
+
+        // 返回true表示文件成功
+        // false 表示文件已经存在
+        if (file.createNewFile()) {
+            Files.write(Paths.get(path),
+                    target.getBytes(StandardCharsets.UTF_8));
+        } else {
+            // 追加写模式
+            Files.write(
+                    Paths.get(path),
+                    target.getBytes(StandardCharsets.UTF_8),
+                    StandardOpenOption.APPEND);
         }
     }
     public static void main(String[] args) throws IOException {

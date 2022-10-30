@@ -38,6 +38,21 @@ public class Expression {
      * 存放各种题型的字符串表达形式
      */
     private List<String> questionList = new ArrayList<>();
+    /**
+     * 存放完整题目
+     */
+    private List<String> fullVersionQues = new ArrayList<>();
+
+    public List<String> getFullVersionQues() {
+        for (int i = 0; i < questionList.size();i++) {
+            fullVersionQues.add(addBlank(expressions.get(i)) + questionList.get(i));
+        }
+        return fullVersionQues;
+    }
+
+    public void setFullVersionQues(List<String> fullVersionQues) {
+        this.fullVersionQues = fullVersionQues;
+    }
 
     public Expression(Difficulty difficulty) {
         map = new HashMap<>();
@@ -233,8 +248,8 @@ public class Expression {
      * @return
      */
     public String addBlank(String str) {
-        if (str.length()!=65) {
-            while (str.length()<65) {
+        if (str.length()!=55) {
+            while (str.length()<55) {
                 str = str+" ";
             }
         }

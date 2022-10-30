@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import com.jfoenix.controls.*?>
@@ -39,7 +40,7 @@
                 <Font name="Comic Sans MS" size="20.0" />
             </font>
         </JFXPasswordField>
-        <JFXButton fx:id="loginButton" buttonType="RAISED" layoutX="387.0" layoutY="566.0" onAction="#doLogin" prefHeight="52.0" prefWidth="224.0" ripplerFill="#222288" style="-fx-background-color: #7AD4EB;" text="Login" textFill="#1b1818">
+        <JFXButton fx:id="loginButton" buttonType="RAISED" layoutX="387.0" layoutY="566.0" onAction="#doLogin" prefHeight="52.0" prefWidth="224.0" ripplerFill="#7ad4eb" style="-fx-background-color: #7AD4EB;" text="Login" textFill="#1b1818">
             <font>
                 <Font name="Dubai Medium" size="29.0" />
             </font>
@@ -111,5 +112,6 @@
                 <Font name="Comic Sans MS" size="19.0" />
             </font>
         </Label>
+      <JFXSpinner fx:id="loadingSpinner" layoutX="631.0" layoutY="537.0" prefHeight="106.0" prefWidth="126.0" visible="false" />
     </children>
 </AnchorPane>

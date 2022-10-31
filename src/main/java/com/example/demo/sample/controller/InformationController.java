@@ -1,9 +1,12 @@
 package com.example.demo.sample.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.demo.SpringbootJavafxDemoApplication;
+import com.example.demo.sample.mapper.RecordMapper;
 import com.example.demo.sample.mapper.UserMapper;
 import com.example.demo.sample.model.Difficulty;
 import com.example.demo.sample.model.Expression;
+import com.example.demo.sample.model.Record;
 import com.example.demo.sample.utils.Range;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextArea;
@@ -29,6 +32,7 @@ import javax.annotation.Resource;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -40,6 +44,9 @@ public class InformationController {
     @Resource
     public UserMapper userMapper;
 
+    @Resource
+    public RecordMapper recordMapper;
+
     public static Difficulty difficulty;
 
     public Expression expression;
@@ -47,7 +54,8 @@ public class InformationController {
     public List<String> questionList;
     //答案列表
     public List<String> resList;
-
+    //最近分数
+    public List<Integer> recentPoint;
 
 
     /**
@@ -107,7 +115,7 @@ public class InformationController {
      * 数据分析(近十次)
      */
     @FXML
-    public LineChart<String,Number> analysisChart;
+    public LineChart<String, Number> analysisChart;
     @FXML
     public Label noticeLab;
     /**
@@ -119,7 +127,7 @@ public class InformationController {
      * 生成题目列表
      */
     public void createQuestions() {
-         difficulty = new Difficulty();
+        difficulty = new Difficulty();
         //是否有小数
         difficulty.setHasDecimal(decimalControl.isSelected());
         //是否含有负数
@@ -168,6 +176,7 @@ public class InformationController {
      */
     private void showInfo() {
         welcomeText.setText("       Hello, " + LoginController.loginUser.getUsername());
+        welcomeText.setEditable(false);
     }
 
     /**
@@ -187,6 +196,7 @@ public class InformationController {
 
     /**
      * 去做题界面
+     *
      * @param event
      */
     public void create(ActionEvent event) throws IOException {
@@ -196,7 +206,7 @@ public class InformationController {
             mountData();
             //3.切换场景
             gotoExercises(event);
-        }else {
+        } else {
             noticeLab.setVisible(true);
         }
 
@@ -204,27 +214,29 @@ public class InformationController {
 
     /**
      * 校验数据
+     *
      * @return
      */
     private boolean checkData() {
         //检查是否为空
-        if(!checkIsBlank()) {
+        if (!checkIsBlank()) {
             return false;
-        };
+        }
+        ;
         String choiceNum = jfxChoiceNum.getText();
         String judgeNum = jfxJudgeNum.getText();
         String fillNum = jfxFillNum.getText();
         String rangeNum = jfxRangeNum.getText();
         String jfxOperatorNumText = jfxOperatorNum.getText();
         //判断是否为整数
-        if(checkIsDigit(choiceNum) && checkIsDigit(judgeNum) && checkIsDigit(fillNum)
+        if (checkIsDigit(choiceNum) && checkIsDigit(judgeNum) && checkIsDigit(fillNum)
                 && checkIsDigit(jfxOperatorNumText) && checkIsDigit(rangeNum)) {
             return false;
         }
         if (Integer.parseInt(jfxOperatorNumText) < 2) {
             return false;
         }
-        if ((Integer.parseInt(choiceNum) + Integer.parseInt(judgeNum) + Integer.parseInt(fillNum)) !=10) {
+        if ((Integer.parseInt(choiceNum) + Integer.parseInt(judgeNum) + Integer.parseInt(fillNum)) != 10) {
             return false;
         }
         int range = Integer.parseInt(rangeNum);
@@ -233,6 +245,7 @@ public class InformationController {
 
     /**
      * 检查是否为空
+     *
      * @return
      */
     private boolean checkIsBlank() {
@@ -315,28 +328,62 @@ public class InformationController {
      * 最近十次的提交记录
      */
     public void showChart() {
-        XYChart.Series<String,Number> xy = new XYChart.Series<>();
+        QueryWrapper<Record> queryWrapper = new QueryWrapper<>();
+        queryWrapper.select("record_user_point")
+                .eq("record_user_name", LoginController.loginUser.getUsername())
+                .orderByDesc("record_time").last("limit 10");
+        List<Object> objects = recordMapper.selectObjs(queryWrapper);
+        while (objects.size() < 10) {
+            objects.add(0,null);
+        }
+        XYChart.Series<String, Number> xy = new XYChart.Series<>();
         xy.setName("point");
-        XYChart.Data<String,Number> d1 = new XYChart.Data<>("1",1);
-        XYChart.Data<String,Number> d2 = new XYChart.Data<>("2",2);
-        XYChart.Data<String,Number> d3 = new XYChart.Data<>("3",3);
-        XYChart.Data<String,Number> d4 = new XYChart.Data<>("4",4);
-        XYChart.Data<String,Number> d5 = new XYChart.Data<>("5",5);
-        XYChart.Data<String,Number> d6 = new XYChart.Data<>("6",6);
-        XYChart.Data<String,Number> d7 = new XYChart.Data<>("7",7);
-        XYChart.Data<String,Number> d8 = new XYChart.Data<>("8",8);
-        XYChart.Data<String,Number> d9 = new XYChart.Data<>("9",9);
-        XYChart.Data<String,Number> d10 = new XYChart.Data<>("10",10);
-        xy.getData().add(d1);
-        xy.getData().add(d2);
-        xy.getData().add(d3);
-        xy.getData().add(d4);
-        xy.getData().add(d5);
-        xy.getData().add(d6);
-        xy.getData().add(d7);
-        xy.getData().add(d8);
-        xy.getData().add(d9);
-        xy.getData().add(d10);
+        if (objects.get(9) != null) {
+            XYChart.Data<String, Number> d1 = new XYChart.Data<>("1", (Number) objects.get(9));
+            xy.getData().add(d1);
+        }
+        if (objects.get(8) != null) {
+            XYChart.Data<String, Number> d2 = new XYChart.Data<>("2", (Number) objects.get(8));
+            xy.getData().add(d2);
+        }
+        if (objects.get(7) != null) {
+            XYChart.Data<String, Number> d3 = new XYChart.Data<>("3", (Number) objects.get(7));
+            xy.getData().add(d3);
+        }
+
+        if (objects.get(6) != null) {
+            XYChart.Data<String, Number> d4 = new XYChart.Data<>("4", (Number) objects.get(6));
+            xy.getData().add(d4);
+        }
+        if (objects.get(5) != null) {
+            XYChart.Data<String, Number> d5 = new XYChart.Data<>("5", (Number) objects.get(5));
+            xy.getData().add(d5);
+        }
+
+        if (objects.get(4) != null) {
+            XYChart.Data<String, Number> d6 = new XYChart.Data<>("6", (Number) objects.get(4));
+            xy.getData().add(d6);
+        }
+
+        if (objects.get(3) != null) {
+            XYChart.Data<String, Number> d7 = new XYChart.Data<>("7", (Number) objects.get(3));
+            xy.getData().add(d7);
+        }
+
+        if (objects.get(2) != null) {
+            XYChart.Data<String, Number> d8 = new XYChart.Data<>("8", (Number) objects.get(2));
+            xy.getData().add(d8);
+        }
+
+        if (objects.get(1) != null) {
+            XYChart.Data<String, Number> d9 = new XYChart.Data<>("9", (Number) objects.get(1));
+            xy.getData().add(d9);
+        }
+
+        if (objects.get(0) != null) {
+            XYChart.Data<String, Number> d10 = new XYChart.Data<>("9", (Number) objects.get(0));
+            xy.getData().add(d10);
+        }
         analysisChart.getData().add(xy);
     }
 }

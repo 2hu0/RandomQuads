@@ -286,4 +286,9 @@ public class TestDemo {
     public  void testStringToInt() {
     }
 
+    @Test
+    public void testSql() {
+
+    }
+
 }

@@ -180,11 +180,11 @@ public class ExercisesController {
      */
     @FXML
     public void initialize() {
-        //展示信息
+       // 展示信息
         showInfo();
-        //展示时间
+       // 展示时间
         showTime();
-        //展示左侧
+       // 展示左侧
         showQuestions();
         showQuestionTypes();
         //展示右侧
@@ -196,6 +196,7 @@ public class ExercisesController {
      * 展示信息
      */
     private void showInfo() {
+        System.out.println("LoginController.loginUser = " + LoginController.loginUser);
         welcomeText.setText("Hello, " + LoginController.loginUser.getUsername());
         welcomeText.setEditable(false);
     }
@@ -277,20 +278,31 @@ public class ExercisesController {
         questionLab10.setText(questionList.get(9));
     }
 
-
     /**
      * 注销登录
      *
      * @param event
      */
     public void doLogout(ActionEvent event) throws IOException {
-
         //重新加载
         Scene scene = new Scene(SpringbootJavafxDemoApplication.loadFxml("/sample/doLogin.fxml").load(), 1000, 800);
         scene.setCursor(new ImageCursor(new Image("/imgs/cursor.png")));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.getIcons().add(new Image("/imgs/icon.png"));
         stage.setScene(scene);
+    }
+
+    private void clearData() {
+        expression = null;
+        exercisesResult = null;
+        point = 0;
+        questionList = null;
+        questionAnswer = null;
+        fullVersionQues = null;
+        isRight = new ArrayList<>();
+        myRes = new ArrayList<>();
+        errorQuestion = new ArrayList<>();
+        rightInfo = null;
     }
 
 
@@ -405,7 +417,6 @@ public class ExercisesController {
     /**
      * 汇总数据 准备写入文件和数据库
      */
-    @Transactional
     public void generateUserData() throws IOException {
         // 1.写入文件
         exercisesResult = new ExercisesResult();
@@ -423,13 +434,17 @@ public class ExercisesController {
         user.setCompletedExercises(user.getCompletedExercises() + 10);
         //更新错误题目数量
         user.setErrorExercises(user.getErrorExercises() + 10 - point);
-        userMapper.updateById(user);
+        System.out.println("userMapper.updateById");
+        System.out.println("point = " + point);
+       // userMapper.updateById(user);
         //3.提交记录写入数据库
         record = new Record();
         record.setRecordName(LoginController.loginUser.getUsername());
         record.setRecordPoint(point);
         record.setRecordTime(new Date());
-        recordMapper.insert(record);
+        System.out.println("recordMapper insert");
+        System.out.println(record.toString());
+       // recordMapper.insert(record);
     }
 
     /**
@@ -439,6 +454,7 @@ public class ExercisesController {
      * @throws IOException
      */
     public void backInfoScene(ActionEvent event) throws IOException {
+        clearData();
         //重新加载
         Scene scene = new Scene(SpringbootJavafxDemoApplication.loadFxml("/sample/info.fxml").load(), 1000, 900);
         scene.setCursor(new ImageCursor(new Image("/imgs/cursor.png")));

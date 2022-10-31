@@ -151,10 +151,9 @@ public class LoginController {
                 exitRegister(actionEvent);
             } else {
                 //插入到数据库里
-                User user = new User(username, password,new Date());
+                User user = new User(username, password);
+                user.setCreateTime(new Date());
                 userMapper.insert(user);
-                System.out.println("insert");
-                //userMapper.insert(user);
                 registerDialog.close();
                 dialogStackPane.getChildren().remove(registerDialog);
                 context.getChildren().remove(dialogStackPane);

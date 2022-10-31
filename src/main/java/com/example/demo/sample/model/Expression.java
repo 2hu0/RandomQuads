@@ -69,6 +69,7 @@ public class Expression {
      * 每十个题目为一组数据
      */
     public void getExpressionMap(){
+        int count = 0;
         for (int i = 0; i < 10; i++) {
             //避免出现1 ÷ 0 类似情况
             try {
@@ -99,6 +100,13 @@ public class Expression {
             }
             //避免太长的运算式子
             if (exercisesGenerator.toString().length()>=50) {
+                i--;
+                continue;
+            }
+            //避免重复
+            if (map.get(exercisesGenerator.toString()) != null) {
+                System.out.println("重复生成了！！！！！");
+                System.out.println("重复:" + exercisesGenerator.toString());
                 i--;
                 continue;
             }
@@ -281,6 +289,9 @@ public class Expression {
     }
 
     public List<String> getQuestionList() {
+        if (questionList.size() != 10) {
+            questionList.forEach(System.out::println);
+        }
         return questionList;
     }
 
